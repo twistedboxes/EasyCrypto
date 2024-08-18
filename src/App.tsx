@@ -1,35 +1,73 @@
 import { useEffect, useState } from "react";
 import CardContainer from "./components/CardContainer";
 import Header from "./components/Header";
-import SearchBar from "./components/SearchBar";
 import { DataContext } from "./SearchContext";
+import { TCard } from "./types/Card";
+import ErrorMessage from "./components/ErrorMessage";
 
 const App = () => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState([]); // This will hold the filtered data to display
+  const [originalData, setOriginalData] = useState([]); // This will hold the original data from the API
+
+  const [error, setError] = useState(false); // This will be used to show an error message
 
   useEffect(() => {
-    const fetchData = async () => {
-      const data = await fetch(import.meta.env.VITE_API_PUBLIC_URL, {
+    const fetchData = async (): Promise<TCard[]> => {
+      const data: Response = await fetch(import.meta.env.VITE_API_PUBLIC_URL, {
         headers: {
           "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "http://localhost:5173",
         },
+      }).catch((error) => {
+        setError(true);
+        console.error("Error fetching data", error);
+        return data;
       });
-      const res = await data.json();
-      setData(res);
-      return res;
+
+      if (data.ok) {
+        const res = await data.json();
+        setData(res);
+        setOriginalData(res); // Store the original data here
+        return res;
+      } else {
+        console.error("Error fetching data", data);
+        setError(true);
+      }
+      return []; // Return an empty array in case of error or if data is not ok
     };
+
     fetchData();
   }, []);
+
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const searchTerm = event.target.value.toLowerCase();
+    if (searchTerm === "") {
+      setData(originalData); // Reset to original data if search field is empty
+    } else {
+      const filteredData = originalData.filter((item: TCard) =>
+        item.name.toLowerCase().includes(searchTerm)
+      );
+      setData(filteredData);
+    }
+  };
 
   return (
     <div className="flex flex-col justify-center items-center">
       <DataContext.Provider value={data}>
         <Header />
-          <SearchBar />
-          <CardContainer />
+        <label className="text-3xl mb-2" htmlFor="search"></label>
+        <div className="bg-slate-200 flex justify-center   gap-3 rounded-lg  p-6 mb-20">
+          <input
+            onChange={handleSearch}
+            className="rounded-md text-xl placeholder:text-slate-300  px-4 py-2 bg-slate-100"
+            type="text"
+            name="search"
+            id="search"
+            placeholder="Search your token"
+          />
+        </div>
+        {error == true ? <ErrorMessage /> : <CardContainer />}
       </DataContext.Provider>
-      {/* <CardContainer data={data} /> */}
     </div>
   );
 };
