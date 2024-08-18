@@ -1,6 +1,8 @@
+
+
 const SearchBar = () => {
   return (
-    <form className="bg-slate-200 flex justify-center  gap-3 rounded-lg  p-6 mb-20">
+    <form  className="bg-slate-200 flex justify-center  gap-3 rounded-lg  p-6 mb-20">
       <label className="pl-1 hidden " htmlFor="name">
         Search
       </label>

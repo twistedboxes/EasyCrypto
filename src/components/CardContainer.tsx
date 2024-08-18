@@ -1,11 +1,11 @@
 import Card from "./Card";
-import { TCardProps, TData } from "../types/Card";
+import { TCardProps } from "../types/Card";
+import { useDataContext } from "../SearchContext";
 
-const CardContainer = ({data}:TData) => {
-
+const CardContainer = () => {
+  const data = useDataContext();
 
   const allCards = data.map((item: TCardProps) => {
-    console.log("item", item);
     return <Card key={item.id} {...item} />;
   });
 

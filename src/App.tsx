@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import CardContainer from "./components/CardContainer";
 import Header from "./components/Header";
 import SearchBar from "./components/SearchBar";
+import { DataContext } from "./SearchContext";
 
 const App = () => {
   const [data, setData] = useState([]);
@@ -23,9 +24,12 @@ const App = () => {
 
   return (
     <div className="flex flex-col justify-center items-center">
-      <Header />
-      <SearchBar />
-      <CardContainer data={data} />
+      <DataContext.Provider value={data}>
+        <Header />
+          <SearchBar />
+          <CardContainer />
+      </DataContext.Provider>
+      {/* <CardContainer data={data} /> */}
     </div>
   );
 };
