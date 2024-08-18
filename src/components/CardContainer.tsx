@@ -15,7 +15,13 @@ const CardContainer = () => {
         Top {`${data.length}`} Tokens
       </h2>
       <div className=" viewer my-8 p-2 w-screen h-[50vh] flex-wrap  max-w-1/2 justify-around flex gap-8">
-        {allCards}
+        {allCards.length === 0 ? (
+          <p className="text-center font-bold text-red-500 text-xl">
+            No tokens found
+          </p>
+        ) : (
+          allCards
+        )}
       </div>
     </>
   );
