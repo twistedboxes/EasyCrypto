@@ -45,7 +45,7 @@ const App = () => {
       setData(originalData); // Reset to original data if search field is empty
     } else {
       const filteredData = originalData.filter((item: TCard) =>
-        item.name.toLowerCase().includes(searchTerm)
+        item.name.toLowerCase().includes(searchTerm) || item.symbol.toLowerCase().includes(searchTerm)
       );
       setData(filteredData);
     }
@@ -56,7 +56,7 @@ const App = () => {
       <DataContext.Provider value={data}>
         <Header />
         <label className="text-3xl mb-2" htmlFor="search"></label>
-        <div className="bg-slate-200 flex justify-center   gap-3 rounded-lg  p-6 mb-20">
+        <div className="bg-slate-200 w-full flex justify-center gap-3 p-6 mb-20">
           <input
             onChange={handleSearch}
             className="rounded-md text-xl placeholder:text-slate-300  px-4 py-2 bg-slate-100"

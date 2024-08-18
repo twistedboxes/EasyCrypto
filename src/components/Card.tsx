@@ -8,9 +8,9 @@ const Card = ({ ...props }: TCard) => {
         <span className="font-bold">{props.name}</span>
         <small className="text-xs">({props.symbol.toUpperCase()})</small>
       </span>
-      <p>Price: ${props.current_price.toLocaleString()}</p>
+      <p>Price: <span className="font-bold">${props.current_price.toLocaleString()}</span></p>
       <span>
-        <span>Total volume: </span>${props.total_volume?.toLocaleString()}
+        <span>Total volume: </span><span className="font-bold">${props.total_volume?.toLocaleString()}</span>
       </span>
     </div>
   );
