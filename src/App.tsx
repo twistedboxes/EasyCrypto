@@ -13,7 +13,7 @@ const App = () => {
 
   useEffect(() => {
     const fetchData = async (): Promise<TCard[]> => {
-      const data: Response = await fetch(import.meta.env.VITE_API_PUBLIC_URL, {
+      const data: Response = await fetch("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd", {
         headers: {
           "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "http://localhost:5173",
@@ -59,7 +59,7 @@ const App = () => {
         <div className="bg-slate-200 w-full flex justify-center gap-3 p-6 mb-20">
           <input
             onChange={handleSearch}
-            className="rounded-md text-xl placeholder:text-slate-300  px-4 py-2 bg-slate-100"
+            className="rounded-md text-xl placeholder:text-slate-400  px-4 py-2 bg-slate-100"
             type="text"
             name="search"
             id="search"

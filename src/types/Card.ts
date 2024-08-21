@@ -1,14 +1,14 @@
 export type TCard = {
   symbol: string;
   name: string;
-  high24: number;
-  low24: number;
+  high_24h: number;
+  low_24h: number;
   currentPrice: number;
   image: string;
   ath: number;
   allTimeLow: number;
   ath_date: string;
-  marketCap: number;
+  market_cap: number;
   current_price: number;
   total_volume?: number | null;
   totalVolume: number;
@@ -18,8 +18,8 @@ export type TCard = {
 export interface TCardProps {
   symbol: string;
   name: string;
-  high24: number;
-  low24: number;
+  high_24h: number;
+  low_24h: number;
   totalVolume: number;
   currentPrice: number;
   image: string;
@@ -27,7 +27,7 @@ export interface TCardProps {
   current_price: number;
   allTimeLow: number;
   ath_date: string;
-  marketCap: number;
+  market_cap: number;
   id: string;
 }
 
