@@ -16,7 +16,7 @@ const App = () => {
       const data: Response = await fetch("https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd", {
         headers: {
           "Content-Type": "application/json",
-          "Access-Control-Allow-Origin": "http://localhost:5173",
+          "Access-Control-Allow-Origin": "https://easycriptoviewer.netlify.app/",
         },
       }).catch((error) => {
         setError(true);
